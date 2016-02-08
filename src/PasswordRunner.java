@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -21,7 +22,7 @@ public class PasswordRunner extends JFrame{
 	private JLabel len_label = new JLabel(), times_label = new JLabel(); //labels for len & times
 	private JLabel vlabel = new JLabel(); //version label
 	private JScrollPane scroll_out = new JScrollPane (output, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER); //scroll pane for the output box
-	
+	private JCheckBox upper = new JCheckBox("Uppercase"), lower = new JCheckBox("Lowercase"), nums = new JCheckBox("Numbers"), sym = new JCheckBox("Symbols"), spaces = new JCheckBox("Spaces"); //check boxes for more customization
 	
 	public PasswordRunner(){
 		setSize(640,480);
@@ -29,25 +30,25 @@ public class PasswordRunner extends JFrame{
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLayout(new FlowLayout());
+		setLayout(new FlowLayout()); //styling
 		
-		len_label.setText("Length: ");
+		len_label.setText("Length: "); //length label
 		add(len_label);
 		
-		len.setPreferredSize(new Dimension(96,28));
+		len.setPreferredSize(new Dimension(96,28)); //length text box
 		len.setText("14");
 		len.setToolTipText("Length of passwords");
 		add(len);
 		
-		times_label.setText("Times: ");
+		times_label.setText("Times: "); //times label
 		add(times_label);
 		
-		times.setPreferredSize(new Dimension(96,28));
+		times.setPreferredSize(new Dimension(96,28)); //times text box
 		times.setText("10");
 		times.setToolTipText("For redundancy: the amount of passwords to be generated");
 		add(times);
 		
-		go.setText("Start");
+		go.setText("Start"); //start button
 		go.addActionListener(new ActionListener(){
 
 			@Override
@@ -67,20 +68,33 @@ public class PasswordRunner extends JFrame{
 					output.setText("Invalid times value!");
 				}
 				else{
-					output.setText(PasswordGenerator.generatePasswords(l, t));
+					output.setText(PasswordGenerator.generatePasswords(l, t, upper.isSelected(), lower.isSelected(), nums.isSelected(), sym.isSelected(), spaces.isSelected()));
 				}
 			}
 			
 		});
 		add(go);
 		
-		vlabel.setText(version);
+		vlabel.setText(version); //version label
 		add(vlabel);
 		
 		output.setEditable(false);
-		scroll_out.setPreferredSize(new Dimension(580,380));
+		scroll_out.setPreferredSize(new Dimension(580,380)); //output text area and scrollable container
 		add(scroll_out);
-
+		
+		//sets default selection for check boxes
+		upper.setSelected(true);
+		lower.setSelected(true);
+		nums.setSelected(true);
+		sym.setSelected(true);
+		spaces.setSelected(false);
+		
+		//adding the check boxes
+		add(upper);
+		add(lower);
+		add(nums);
+		add(sym);
+		add(spaces);
 		
 		setVisible(true);
 	}
