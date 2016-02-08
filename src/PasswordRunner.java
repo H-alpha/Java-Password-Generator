@@ -6,12 +6,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class PasswordRunner extends JFrame{
 	
-	private String version = "v1.0.0";
+	private String version = "v1.0.2";
 
 	private JTextArea output =  new JTextArea(); //output text area
 	private JTextField len = new JTextField(); //input text box for generated password length
@@ -19,6 +20,7 @@ public class PasswordRunner extends JFrame{
 	private JButton go = new JButton(); //the start button
 	private JLabel len_label = new JLabel(), times_label = new JLabel(); //labels for len & times
 	private JLabel vlabel = new JLabel(); //version label
+	private JScrollPane scroll_out = new JScrollPane (output, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER); //scroll pane for the output box
 	
 	
 	public PasswordRunner(){
@@ -58,10 +60,10 @@ public class PasswordRunner extends JFrame{
 				}catch(Exception e){
 					output.setText("Invalid input!");
 				}
-				if(l>65||l<=0){
+				if(l>80||l<=0){
 					output.setText("Invalid password length!");
 				}
-				else if(t>12||t<=0){
+				else if(t>100||t<=0){
 					output.setText("Invalid times value!");
 				}
 				else{
@@ -76,8 +78,8 @@ public class PasswordRunner extends JFrame{
 		add(vlabel);
 		
 		output.setEditable(false);
-		output.setPreferredSize(new Dimension(480,380));
-		add(output);
+		scroll_out.setPreferredSize(new Dimension(580,380));
+		add(scroll_out);
 
 		
 		setVisible(true);
