@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 
 public class PasswordRunner extends JFrame{
 	
-	private String version = "v1.0.2";
+	private String version = "v1.1.4";
 
 	private JTextArea output =  new JTextArea(); //output text area
 	private JTextField len = new JTextField(); //input text box for generated password length
