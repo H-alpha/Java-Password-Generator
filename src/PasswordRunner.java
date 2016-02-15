@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 
 public class PasswordRunner extends JFrame{
 	
-	private String version = "v1.1.7";
+	private String version = "v1.1.8";
 
 	private JTextArea output =  new JTextArea(); //output text area
 	private JTextField len = new JTextField(); //input text box for generated password length
@@ -41,6 +41,8 @@ public class PasswordRunner extends JFrame{
 		len.setPreferredSize(new Dimension(96,28)); //length text box
 		len.setText("14");
 		len.setToolTipText("Length of passwords");
+		len.setBackground(new Color(10,10,10));
+		len.setForeground(Color.WHITE);
 		add(len);
 		
 		times_label.setText("Times: "); //times label
@@ -50,9 +52,13 @@ public class PasswordRunner extends JFrame{
 		times.setPreferredSize(new Dimension(96,28)); //times text box
 		times.setText("10");
 		times.setToolTipText("For redundancy: the amount of passwords to be generated");
+		times.setBackground(new Color(10,10,10));
+		times.setForeground(Color.WHITE);
 		add(times);
 		
 		go.setText("Start"); //start button
+		go.setBackground(Color.BLACK);
+		go.setForeground(Color.WHITE);
 		go.addActionListener(new ActionListener(){
 
 			@Override
@@ -103,6 +109,13 @@ public class PasswordRunner extends JFrame{
 		nums.setBackground(Color.BLACK);
 		sym.setBackground(Color.BLACK);
 		spaces.setBackground(Color.BLACK);
+		
+		//setting check box text color
+		upper.setForeground(Color.WHITE);
+		lower.setForeground(Color.WHITE);
+		nums.setForeground(Color.WHITE);
+		sym.setForeground(Color.WHITE);
+		spaces.setForeground(Color.WHITE);
 		
 		//adding the check boxes
 		add(upper);
