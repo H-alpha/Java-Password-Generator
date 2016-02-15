@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -13,7 +14,7 @@ import javax.swing.JTextField;
 
 public class PasswordRunner extends JFrame{
 	
-	private String version = "v1.1.4";
+	private String version = "v1.1.7";
 
 	private JTextArea output =  new JTextArea(); //output text area
 	private JTextField len = new JTextField(); //input text box for generated password length
@@ -31,8 +32,10 @@ public class PasswordRunner extends JFrame{
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout()); //styling
+		getContentPane().setBackground(Color.BLACK); //black background 4 el1te haXXx0rZ
 		
 		len_label.setText("Length: "); //length label
+		len_label.setForeground(Color.WHITE);
 		add(len_label);
 		
 		len.setPreferredSize(new Dimension(96,28)); //length text box
@@ -41,6 +44,7 @@ public class PasswordRunner extends JFrame{
 		add(len);
 		
 		times_label.setText("Times: "); //times label
+		times_label.setForeground(Color.WHITE);
 		add(times_label);
 		
 		times.setPreferredSize(new Dimension(96,28)); //times text box
@@ -76,10 +80,14 @@ public class PasswordRunner extends JFrame{
 		add(go);
 		
 		vlabel.setText(version); //version label
+		vlabel.setForeground(Color.WHITE);
 		add(vlabel);
 		
-		output.setEditable(false);
-		scroll_out.setPreferredSize(new Dimension(580,380)); //output text area and scrollable container
+		output.setEditable(false); //output text box inside scoll container
+		output.setBackground(new Color(10,10,10));
+		output.setForeground(Color.WHITE); //styling 4 el1t3 h@xxx0rzz
+		scroll_out.setPreferredSize(new Dimension(580,380)); //output text area and scrollable container size
+		scroll_out.setBackground(Color.BLACK);
 		add(scroll_out);
 		
 		//sets default selection for check boxes
@@ -89,13 +97,20 @@ public class PasswordRunner extends JFrame{
 		sym.setSelected(true);
 		spaces.setSelected(false);
 		
+		//setting check box backgrounds to black
+		upper.setBackground(Color.BLACK);
+		lower.setBackground(Color.BLACK);
+		nums.setBackground(Color.BLACK);
+		sym.setBackground(Color.BLACK);
+		spaces.setBackground(Color.BLACK);
+		
 		//adding the check boxes
 		add(upper);
 		add(lower);
 		add(nums);
 		add(sym);
 		add(spaces);
-		
+
 		setVisible(true);
 	}
 	
