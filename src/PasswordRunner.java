@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 
 public class PasswordRunner extends JFrame{
 	
-	private String version = "v1.1.8";
+	private String version = "v1.1.9";
 
 	private JTextArea output =  new JTextArea(); //output text area
 	private JTextField len = new JTextField(); //input text box for generated password length
@@ -78,7 +78,12 @@ public class PasswordRunner extends JFrame{
 					output.setText("Invalid times value!");
 				}
 				else{
-					output.setText(PasswordGenerator.generatePasswords(l, t, upper.isSelected(), lower.isSelected(), nums.isSelected(), sym.isSelected(), spaces.isSelected()));
+					String u = ""; //holder for the generated passwords below
+					for(int x=0; x<t; x++){
+						u+=(PasswordGenerator.generatePasswords(l, upper.isSelected(), lower.isSelected(), nums.isSelected(), sym.isSelected(), spaces.isSelected()));
+						u+="\n\n";
+					}
+					output.setText(u);
 				}
 			}
 			

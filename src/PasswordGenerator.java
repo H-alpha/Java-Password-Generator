@@ -16,8 +16,11 @@ public class PasswordGenerator {
 		return out;
 	}
 	
-	public static String generatePasswords(int length, int times, boolean up, boolean low, boolean nums, boolean syms, boolean spaces){
-		String out = "";
+	public static String generatePasswords(int length, boolean up, boolean low, boolean nums, boolean syms, boolean spaces){
+		String out = ""; 
+		
+		//Only generates one password at a time now so this class can be reused for general purpose
+		
 		ArrayList<Character> temp = new ArrayList<Character>();
 		
 		if(!(up||low||nums||syms||spaces)){
@@ -59,12 +62,11 @@ public class PasswordGenerator {
 		}
 		
 		int max = temp.size();
-		for(int x=0; x<times; x++){
-			for(int y=0; y<length; y++){
-				out+=(char)(temp.get(rand.nextInt(max)));
-			}
-			out+="\n\n";
+
+		for(int y=0; y<length; y++){
+			out+=(char)(temp.get(rand.nextInt(max)));
 		}
+
 		return out;
 	}
 	
