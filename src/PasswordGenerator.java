@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class PasswordGenerator {
@@ -68,6 +69,86 @@ public class PasswordGenerator {
 		}
 
 		return out;
+	}
+	
+	public static String generatePasswords(String mask, int length, boolean up, boolean low, boolean nums, boolean syms){
+		String out = ""; 
+		
+		//Only generates one password at a time now so this class can be reused for general purpose
+		
+		ArrayList<Character> temp = new ArrayList<Character>();
+		
+		if(!(mask!=null&&mask.length()>1)){ //makes sure no invalid masks are passed
+			return "Invalid mask"; //if there is an invalid mask, the method is called without the mask
+		}
+		
+		if(!(up||low||nums||syms)){
+			return "Please select at least one check box!";
+		}
+		
+		
+		
+		ArrayList<Character> m = parseMask(mask); //converts the mask string into an array
+		if(m==null||m.size()>80||m.size()<1) //checks for mask parse error
+			return "Error while parsing mask!";
+
+		
+		
+		for(Character g : m){
+		if(g=='u'){
+			for(int x=65; x<=90; x++){
+				temp.add((char)x);
+			}
+		}
+		if(g=='l'){
+			for(int x=97; x<=122; x++){
+				temp.add((char)x);
+			}
+		}
+		if(g=='d'){
+			for(int x=48; x<=57; x++){
+				temp.add((char)x);
+			}
+		}
+		if(g=='s'){
+			for(int x=33; x<=47; x++){
+				temp.add((char)x);
+			}
+			for(int w=58; w<=64; w++){
+				temp.add((char)w);
+			}
+			for(int z=91; z<=96; z++){
+				temp.add((char)z);
+			}
+			for(int a=123; a<=126; a++){
+				temp.add((char)a);
+			}
+		}
+		
+		try{
+			out+=(char)(temp.get(rand.nextInt(temp.size())));
+		}catch(Exception e){}; //whats exception handling???
+		temp = new ArrayList<Character>(); //resets the temp array
+		
+		}
+
+		return out;
+	}
+	
+	private static ArrayList<Character> parseMask(String mask){
+		ArrayList<Character> o =  new ArrayList<Character>();
+		try{
+			for(int x=0; x<mask.length(); x++){
+				if(mask.charAt(x)!='?'){
+					o.add(mask.charAt(x));
+				}
+			}
+			//System.out.println(Arrays.toString(e));
+			return o;
+		}catch(Exception e){
+			//e.printStackTrace();
+		};
+		return null;
 	}
 	
 	

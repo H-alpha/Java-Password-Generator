@@ -8,13 +8,14 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class PasswordRunner extends JFrame{
 	
-	private String version = "v1.1.9";
+	private String version = "v1.2.6";
 
 	private JTextArea output =  new JTextArea(); //output text area
 	private JTextField len = new JTextField(); //input text box for generated password length
@@ -24,6 +25,8 @@ public class PasswordRunner extends JFrame{
 	private JLabel vlabel = new JLabel(); //version label
 	private JScrollPane scroll_out = new JScrollPane (output, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER); //scroll pane for the output box
 	private JCheckBox upper = new JCheckBox("Uppercase"), lower = new JCheckBox("Lowercase"), nums = new JCheckBox("Numbers"), sym = new JCheckBox("Symbols"), spaces = new JCheckBox("Spaces"); //check boxes for more customization
+	private JButton mask_button = new JButton(), clear_mask = new JButton(); //mask button and clear mask button
+	private String mask = null;
 	
 	public PasswordRunner(){
 		setSize(640,480);
@@ -80,7 +83,12 @@ public class PasswordRunner extends JFrame{
 				else{
 					String u = ""; //holder for the generated passwords below
 					for(int x=0; x<t; x++){
-						u+=(PasswordGenerator.generatePasswords(l, upper.isSelected(), lower.isSelected(), nums.isSelected(), sym.isSelected(), spaces.isSelected()));
+						if(mask != null){
+							u+=(PasswordGenerator.generatePasswords(mask, l, upper.isSelected(), lower.isSelected(), nums.isSelected(), sym.isSelected()));
+						}
+						else{
+							u+=(PasswordGenerator.generatePasswords(l, upper.isSelected(), lower.isSelected(), nums.isSelected(), sym.isSelected(), spaces.isSelected()));
+						}
 						u+="\n\n";
 					}
 					output.setText(u);
@@ -128,7 +136,36 @@ public class PasswordRunner extends JFrame{
 		add(nums);
 		add(sym);
 		add(spaces);
+		
+		mask_button.setText("Add Mask");
+		mask_button.setForeground(Color.WHITE);
+		mask_button.setBackground(Color.BLACK);
+		mask_button.addActionListener(new ActionListener(){
 
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				mask = JOptionPane.showInputDialog(null, "Enter a custom mask").toLowerCase(); //gets inputted mask string
+				//System.out.println(mask);
+			}
+			
+		});
+		add(mask_button); //adds mask button
+		
+		clear_mask.setText("Clear Mask");
+		clear_mask.setForeground(Color.WHITE);
+		clear_mask.setBackground(Color.BLACK);
+		clear_mask.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				mask = null;
+			}
+			
+		});
+		add(clear_mask); //adds clear mask button
+		
 		setVisible(true);
 	}
 	
