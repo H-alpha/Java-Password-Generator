@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 
 public class PasswordRunner extends JFrame{
 	
-	private String version = "v1.2.6";
+	private String version = "v1.2.8";
 
 	private JTextArea output =  new JTextArea(); //output text area
 	private JTextField len = new JTextField(); //input text box for generated password length
@@ -84,6 +84,7 @@ public class PasswordRunner extends JFrame{
 					String u = ""; //holder for the generated passwords below
 					for(int x=0; x<t; x++){
 						if(mask != null){
+							len.setEditable(false);
 							u+=(PasswordGenerator.generatePasswords(mask, l, upper.isSelected(), lower.isSelected(), nums.isSelected(), sym.isSelected()));
 						}
 						else{
@@ -161,6 +162,8 @@ public class PasswordRunner extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				mask = null;
+				output.setText("Mask cleared!");
+				len.setEditable(true);
 			}
 			
 		});

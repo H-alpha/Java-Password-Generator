@@ -88,13 +88,14 @@ public class PasswordGenerator {
 		
 		
 		
-		ArrayList<Character> m = parseMask(mask); //converts the mask string into an array
-		if(m==null||m.size()>80||m.size()<1) //checks for mask parse error
+		String m = parseMask(mask); //converts the mask string into an array
+		if(m==null||m.length()>80||m.length()<1) //checks for mask parse error
 			return "Error while parsing mask!";
 
 		
 		
-		for(Character g : m){
+		for(int q=0; q<m.length(); q++){
+		char g = m.charAt(q);
 		if(g=='u'){
 			for(int x=65; x<=90; x++){
 				temp.add((char)x);
@@ -135,16 +136,9 @@ public class PasswordGenerator {
 		return out;
 	}
 	
-	private static ArrayList<Character> parseMask(String mask){
-		ArrayList<Character> o =  new ArrayList<Character>();
+	private static String parseMask(String mask){
 		try{
-			for(int x=0; x<mask.length(); x++){
-				if(mask.charAt(x)!='?'){
-					o.add(mask.charAt(x));
-				}
-			}
-			//System.out.println(Arrays.toString(e));
-			return o;
+			return mask.replaceAll("/?", "");
 		}catch(Exception e){
 			//e.printStackTrace();
 		};
